@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AIXA — Portfolio</title>
+
+  <!-- Fonts & Icons -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;700&family=Playfair+Display:wght@500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"/>
+
+  <style>
+    /* ---------- GLOBAL ---------- */
+    body {
+      margin: 0;
+      font-family: 'Inter', sans-serif;
+      background: #fff;
+      color: #000;
+      scroll-behavior: smooth;
+      overflow-x: hidden;
+    }
+    a { text-decoration: none; color: inherit; }
+
+    /* ---------- NAV ---------- */
+    .nav {
+      padding: 20px 40px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: sticky;
+      top: 0;
+      background: #fff;
+      z-index: 1000;
+      border-bottom: 1px solid #eee;
+    }
+    .nav a {
+      font-weight: 600;
+      margin-left: 20px;
+      transition: 0.3s;
+    }
+    .nav a:hover {
+      opacity: 0.6;
+    }
+    .logo {
+      font-size: 1.8rem;
+      font-family: 'Playfair Display', serif;
+      letter-spacing: 2px;
+    }
+
+    /* ---------- HERO ---------- */
+    .hero-text {
+      text-align: center;
+      padding: 80px 20px 60px;
+      background: linear-gradient(180deg, #fff 0%, #f7f7f7 100%);
+      position: relative;
+    }
+    .profile-img {
+      width: 220px;
+      height: 220px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 5px solid #000;
+      margin-bottom: 20px;
+      box-shadow: 0 0 20px rgba(0,0,0,0.1);
+    }
+    @media (max-width: 600px) {
+      .profile-img {
+        width: 150px;
+        height: 150px;
+      }
+    }
+    .hero-text h1 {
+      font-size: 3rem;
+      font-family: 'Playfair Display', serif;
+      margin: 10px 0;
+    }
+    .tagline {
+      font-weight: 500;
+      font-size: 1.2rem;
+      color: #555;
+      letter-spacing: 1px;
+    }
+    .tagline .dot {
+      font-weight: bold;
+      margin: 0 8px;
+    }
+
+    /* ---------- SECTIONS ---------- */
+    .section {
+      max-width: 900px;
+      margin: auto;
+      padding: 60px 40px;
+      opacity: 0;
+      transform: translateY(50px);
+      transition: all 0.8s ease-out;
+    }
+    .section.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: 2.3rem;
+      margin-bottom: 20px;
+      letter-spacing: 1px;
+    }
+    p {
+      line-height: 1.7;
+    }
+
+    /* ---------- GRID BOXES ---------- */
+    .brand-grid, .consult-grid {
+      display: grid;
+      gap: 20px;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      margin-top: 25px;
+    }
+    .box {
+      border: 1px solid black;
+      padding: 35px 20px;
+      text-align: center;
+      font-weight: 600;
+      transition: 0.3s;
+      cursor: pointer;
+    }
+    .box:hover {
+      background: black;
+      color: white;
+      transform: scale(1.05);
+    }
+
+    /* ---------- SECTION IMAGES ---------- */
+    .brand-img {
+      width: 100%;
+      max-width: 800px;
+      display: block;
+      margin: 20px auto;
+      object-fit: cover;
+      border-radius: 10px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    }
+    .consult-img {
+      width: 100%;
+      max-width: 800px;
+      display: block;
+      margin: 20px auto;
+      object-fit: cover;
+      border-radius: 10px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    }
+
+    /* ---------- REVIEWS SLIDER ---------- */
+    .slider {
+      position: relative;
+      height: 130px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    .slide {
+      position: absolute;
+      opacity: 0;
+      transition: opacity 0.6s;
+      font-size: 1.2rem;
+      text-align: center;
+      width: 80%;
+    }
+    .slide.active {
+      opacity: 1;
+    }
+    .dots {
+      text-align: center;
+      margin-top: 20px;
+    }
+    .dot {
+      height: 10px;
+      width: 10px;
+      background: black;
+      display: inline-block;
+      border-radius: 50%;
+      margin: 0 5px;
+      opacity: 0.3;
+      transition: 0.3s;
+    }
+    .dot.active {
+      opacity: 1;
+    }
+
+    /* ---------- SOCIAL ---------- */
+    .social ul {
+      list-style: none;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .social li {
+      margin: 12px 0;
+    }
+    .social a {
+      font-size: 1.2rem;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      border-bottom: 1px solid black;
+      padding-bottom: 3px;
+      transition: 0.3s;
+    }
+    .social a:hover {
+      opacity: .6;
+    }
+    .social i {
+      color: black;
+      transition: 0.3s;
+    }
+    .social a:hover i {
+      color: #d4af37;
+    }
+
+    /* ---------- SHOP BUTTON ---------- */
+    .shop-btn {
+      position: fixed;
+      bottom: 30px;
+      right: 30px;
+      background: black;
+      color: white;
+      padding: 15px 25px;
+      border-radius: 50px;
+      font-weight: 600;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+      z-index: 999;
+      transition: 0.3s;
+    }
+    .shop-btn:hover {
+      background: #333;
+      transform: scale(1.05);
+    }
+
+    /* ---------- FOOTER ---------- */
+    footer {
+      text-align: center;
+      padding: 40px 0;
+      opacity: .6;
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- NAV -->
+  <nav class="nav">
+    <div class="logo">AIXA</div>
+    <div>
+      <a href="#about">About</a>
+      <a href="#brand">Clothing</a>
+      <a href="#consult">Consulting</a>
+      <a href="#reviews">Reviews</a>
+      <a href="#connect">Connect</a>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <div class="hero-text">
+    <img src="https://i.supaimg.com/2f684a31-209f-4713-b81c-8cf41b557913.jpg" class="profile-img" alt="Adhishesan S">
+    <h1>Adhishesan S</h1>
+    <div class="tagline">Founder of AIXA <span class="dot">•</span> Image Consultant</div>
+  </div>
+
+  <!-- ABOUT -->
+  <section class="about section" id="about">
+    <h2>About Me</h2>
+    <p>
+      I'm Adhishesan — founder of AIXA, a minimalist clothing brand, and an Image Consultant guiding people to elevate their style and confidence.
+    </p>
+  </section>
+
+  <!-- AIXA BRAND -->
+  <section class="brand section" id="brand">
+    <h2>AIXA Clothing</h2>
+    <p>AIXA delivers premium everyday essentials with clean silhouette, monochrome aesthetic and modern streetwear vibe.</p>
+    <!-- Brand Image -->
+    <img src="https://i.supaimg.com/9e39e777-55a6-4808-89fa-5eca9f34d60d.jpg" alt="AIXA Clothing Collection" class="brand-img">
+    <div class="brand-grid">
+      <div class="box">MEN</div>
+      <div class="box">ESSENTIALS</div>
+      <div class="box">STREET FITS</div>
+      <div class="box">LIMITED</div>
+    </div>
+  </section>
+
+  <!-- IMAGE CONSULTING -->
+  <section class="consult section" id="consult">
+    <h2>Image Consulting</h2>
+    <p>
+      As an Image Consultant, I help transform personal style through wardrobe curation, grooming advice and personal styling — tailored for confidence & identity.
+    </p>
+    <!-- Consulting Section Image -->
+    <img src="https://i.supaimg.com/07eff4a8-ad0a-47fa-b0f7-364f8a9793eb.jpg" alt="Image Consulting Service" class="consult-img">
+    <div class="consult-grid">
+      <div class="box">Personal Styling</div>
+      <div class="box">Wardrobe Building</div>
+      <div class="box">Fashion Guidance</div>
+      <div<div class="box">Photoshoot Styling</div>
+    </div>
+  </section>
+
+  <!-- REVIEWS -->
+  <section class="reviews section" id="reviews">
+    <h2>Customer Reviews</h2>
+    <div class="slider">
+      <div class="slide active">“AIXA designs are clean and premium.” — Raj</div>
+      <div class="slide">“My styling session was amazing!” — Harish</div>
+      <div class="slide">“Great quality and fits.” — Sanjay</div>
+      <div class="slide">“Highly recommend AIXA.” — Harish</div>
+    </div>
+    <div class="dots">
+      <span class="dot active"></span>
+      <span class="dot"></span>
+      <span class="dot"></span>
+      <span class="dot"></span>
+    </div>
+  </section>
+
+  <!-- SOCIAL / CONNECT -->
+  <section class="social section" id="connect">
+    <h2>Connect</h2>
+    <ul>
+      <li><a href="https://www.instagram.com/aixathrift" target="_blank"><i class="fab fa-instagram"></i>Instagram — @aixathrift</a></li>
+      <li><a href="https://www.youtube.com/@b.him_x" target="_blank"><i class="fab fa-youtube"></i>YouTube — B.Him_X</a></li>
+      <li><a href="https://aixaclothing.vercel.app/" target="_blank"><i class="fas fa-store"></i>AIXA Online Store</a></li>
+    </ul>
+  </section>
+
+  <!-- SHOP BUTTON -->
+  <a href="https://aixaclothing.vercel.app/" target="_blank" class="shop-btn">Shop Now</a>
+
+  <!-- FOOTER -->
+  <footer>
+    © 2025 AIXA — Clothing & Image Consulting. All Rights Reserved.
+  </footer>
+
+  <!-- SCRIPTS -->
+  <script>
+    // Reviews Slider
+    let index = 0;
+    const slides = document.querySelectorAll(".slide");
+    const dots = document.querySelectorAll(".dot");
+
+    function showSlide() {
+      slides.forEach((s,i)=>{ s.classList.remove("active"); dots[i].classList.remove("active"); });
+      slides[index].classList.add("active");
+      dots[index].classList.add("active");
+      index = (index + 1) % slides.length;
+    }
+    setInterval(showSlide, 3000);
+
+    // Scroll Animation
+    const sections = document.querySelectorAll('.section');
+    window.addEventListener('scroll', () => {
+      const triggerBottom = window.innerHeight / 5 * 4;
+      sections.forEach(section => {
+        const sectionTop = section.getBoundingClientRect().top;
+        if(sectionTop < triggerBottom){ section.classList.add('visible'); }
+      });
+    });
+  </script>
+
+</body>
+</html>
